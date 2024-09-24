@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/stylesheet.css" rel="stylesheet">
+    <title>Jokes Display</title>
+   
+</head>
+<body>
+
+   <div class="container">
+      <h1>Random Jokes</h1>
+
+      <!-- Display an error message if it exists -->
+      <% if (error) { %>
+          <p class="error">Error: <%= error %></p>
+      <% } %>
+
+      <!-- Display joke data if available -->
+      <% if (data && data.type === 'twopart') { %>
+          <div class="card">
+              <h3>Category: <%= data.category %></h3>
+              <p><strong>Setup:</strong> <%= data.setup %></p>
+              <p><strong>Delivery:</strong> <%= data.delivery %></p>
+          </div>
+      <% } else if (data && data.type === 'single') { %>
+          <div class="card">
+              <h3>Category: <%= data.category %></h3>
+              <p><%= data.joke %></p>
+          </div>
+      <% } else { %>
+          <p>No jokes available</p>
+      <% } %>
+
+      <!-- Form to request a joke from a specific category -->
+      <div class="form-card">
+          <form action="/" method="POST">
+              <label for="category">Select a category:</label>
+              <select name="category" id="category">
+                  <option value="Any">Any</option>
+                  <option value="Programming">Programming</option>
+                  <option value="Misc">Misc</option>
+                  <option value="Pun">Pun</option>
+                  <option value="Spooky">Spooky</option>
+                  <option value="Christmas">Christmas</option>
+              </select>
+              <br />
+              <button type="submit">Get Joke</button>
+          </form>
+      </div>
+  </div>
+  
+</body>
+</html>
